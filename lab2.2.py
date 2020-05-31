@@ -1,6 +1,8 @@
 from math import sin, cos, pi, pow, sqrt, fabs
 from random import random
 import matplotlib.pyplot as plt
+from numpy import fft
+from timeit import default_timer as timer
 
 
 def generate(n, w, N):
@@ -24,9 +26,14 @@ def my_fft(x):
 
 def main():
   gen = generate(8, 1100, 256)
+  t1 = timer()
   resMy = list(my_fft(gen))
+  t2 = timer()
+  resNum = list(fft.fft(gen))
+  t3 = timer()
   plt.plot(resMy)
   plt.show()
+  print(F"Time my fft {t2 - t1}\nTime numpy fft {t3 - t2}")
 
 
 main()
